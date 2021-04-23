@@ -1,0 +1,97 @@
+#include <iostream>
+using namespace std;
+
+int heapArray[50];
+int size = -1;
+int parent(int i)
+{
+return (i - 1) / 2;
+}
+int left(int i)
+{
+
+return 2*i+1;
+}
+void swap(int* a, int* b)
+{
+int temp;
+a = b;
+b = a;
+}
+void maintainHeap(int i)
+{
+while (i > -1 && heapArray[parent(i)] < heapArray[i])
+{
+swap(heapArray[parent(i)], heapArray[i]);
+i = parent(i);
+}
+}
+void minHeapify(int i)
+{
+int lt = left(i);
+int maxIndex = i;
+if (lt < size && heapArray[lt] < heapArray[i])
+maxIndex = lt;
+
+if (maxIndex != i)
+{
+swap(heapArray[i],heapArray[maxIndex]);
+minHeapify(maxIndex);
+}
+}
+void insert(int i)
+{
+size = size + 1;
+heapArray[size] = i;
+maintainHeap(size);
+}
+int getMaxPriority()
+{
+return heapArray[0];
+}
+
+void changePriority(int i,int key)
+{
+int oldp=heapArray[i];
+heapArray[i]=key;
+if(key>oldp)
+maintainHeap(key);
+else
+{
+int lt = left(i);
+int maxIndex = i;
+if (lt < size && heapArray[lt] > heapArray[i])
+maxIndex = lt;
+if (maxIndex != i)
+{
+swap(heapArray[i],heapArray[maxIndex]);
+minHeapify(maxIndex);
+}
+
+}
+}
+void display()
+{
+cout<<"Priority queue is: ";
+for(int i=0;i<=size;i++)
+{
+cout<<heapArray[i]<<" ";
+}
+}
+int main()
+{
+insert(45);
+insert(20);
+insert(14);
+insert(12);
+insert(31);
+insert(7);
+insert(11);
+insert(13);
+insert(7);
+display();
+cout<<endl;
+cout<<"Maximum priority: "<<getMaxPriority();
+changePriority(0,5);
+display();
+}
