@@ -1,0 +1,28 @@
+#include <iostream>
+
+using namespace std;
+int arr[]={11,23,45,56,77};
+    int i,pos;
+void position()
+{
+    cout<<"\nEnter Pos"<<endl;
+    cin>>pos;
+    cout<<"Element in position "<<pos<<" "<<arr[pos-1]<<endl;
+    cout<<"Elements after pos "<<pos<<endl;
+    int s=sizeof(arr)/sizeof(arr[pos-1]);
+    for(i=pos;i<s;i++)
+    {
+        cout<<arr[i]<<" ";
+    }
+}
+int main()
+{
+    
+    cout<<"Array Elements are:"<<endl;
+    for(i=0;i<sizeof(arr)/sizeof(arr[0]);i++)
+    {
+        cout<<arr[i]<<" ";
+    }
+    position();
+    return 0;
+}
